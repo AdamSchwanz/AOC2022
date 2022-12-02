@@ -1,0 +1,38 @@
+Private Sub AOC_Click()
+   
+    'Has Two Tables, AOCFinalT and AOCT, both have ID as an autonumber, AOCNumber as a Number, AOCElf as a Number
+    Dim Counter
+    Counter = DCount("*", "AOCT")
+   
+    'Do While There Are Records In AOCT
+    Do While Counter > 0
+        'Find The First Record With A Null (blank line)
+        Dim MinNull
+        MinNull = Nz(DMin("ID", "AOCT", "IsNull(AocNumber)"), 0)
+            'Find the total the Elf is carrying
+            If MinNull <> 0 Then
+                Dim TotalAmount, ElfNumber
+                TotalAmount = DSum("AOCNumber", "AOCT", "ID<" & MinNull)
+                ElfNumber = Nz(DMax("AOCElf", "AOCFinalT"), 0) + 1
+            Else
+                TotalAmount = DSum("AOCNumber", "AOCT")
+                ElfNumber = Nz(DMax("AOCElf", "AOCFinalT"), 0) + 1
+            End If
+       
+        'Insert Sum values into second table
+        CurrentDb.Execute ("Insert Into AOCFinalT (AOCNumber,AOCElf) VALUES (" & TotalAmount & "," & ElfNumber & ")")
+       
+        'Delete Record already counted
+        If MinNull <> 0 Then
+        CurrentDb.Execute ("Delete * From AOCT Where ID<=" & MinNull)
+        Else
+        CurrentDb.Execute ("Delete * From AOCT")
+        End If
+       
+        'Count the Records in AOCT to see if continue loop
+        Counter = Nz(DCount("*", "AOCT"), 0)
+    Loop
+   
+    'Give Me My Answer Pls
+    MsgBox (DMax("AocNumber", "AocFinalT"))
+End Sub
