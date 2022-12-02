@@ -1,0 +1,75 @@
+Private Sub AOCBtn2_Click()
+    'One Table with ID Autonumber, OpponentChoice ShortText, MyChoice ShortText, CodeGiven ShortText, Points Number, ForcedPoints Number
+    
+    'Part Two
+    'X = Lose Y=Draw Z=Win
+    
+    'Split code given into Opponents Choice and Our Choice
+    Dim RS As Recordset
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    Dim PointsWon, Outcome
+    PointsWon = 0
+    Outcome = 0
+    
+    While Not RS.EOF
+    RS.Edit
+    RS!OpponentChoice = Left(RS!CodeGiven, 1)
+    RS!MyChoice = Right(RS!CodeGiven, 1)
+
+    Dim Rock, Paper, Scissors, Loss, Tie, Win
+    Rock = 1 'X
+    Paper = 2 'Y
+    Scissors = 3 'Z
+    Loss = 0
+    Tie = 3
+    Win = 6
+    
+    'Find The Match Outcome
+    'Rock
+    If RS!OpponentChoice = "A" Then
+        'Need To Lose, Pick Scissors
+        If RS!MyChoice = "X" Then
+        RS!ForcedPoints = Scissors + Loss
+        'Need To Tie, Pick Rock
+        ElseIf RS!MyChoice = "Y" Then
+        RS!ForcedPoints = Rock + Tie
+        'Need To Win, Pick Paper
+        ElseIf RS!MyChoice = "Z" Then
+        RS!ForcedPoints = Paper + Win
+        End If
+    'Paper
+    ElseIf RS!OpponentChoice = "B" Then
+        'Need To Lose, Pick Rock
+        If RS!MyChoice = "X" Then
+        RS!ForcedPoints = Rock + Loss
+        'Need To Tie, Pick Paper
+        ElseIf RS!MyChoice = "Y" Then
+        RS!ForcedPoints = Paper + Tie
+        'Need To Win, Pick Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        RS!ForcedPoints = Scissors + Win
+        End If
+    'Scissors
+    ElseIf RS!OpponentChoice = "C" Then
+        'Need To Lose, Pick Paper
+        If RS!MyChoice = "X" Then
+        RS!ForcedPoints = Paper + Loss
+        'Need To Tie, Pick Scissors
+        ElseIf RS!MyChoice = "Y" Then
+        RS!ForcedPoints = Scissors + Tie
+        'Need To Win, Pick Rock
+        ElseIf RS!MyChoice = "Z" Then
+        RS!ForcedPoints = Rock + Win
+        End If
+    End If
+    RS.Update
+    RS.MoveNext
+    Wend
+    
+    RS.Close
+    Set RS = Nothing
+    
+'Answer
+MsgBox (DSum("ForcedPoints", "AOCT"))
+
+End Sub
