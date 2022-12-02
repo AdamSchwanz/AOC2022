@@ -1,0 +1,113 @@
+Private Sub AOCBtn_Click()
+    'One Table with ID Autonumber, OpponentChoice ShortText, MyChoice ShortText, CodeGiven ShortText, Points Number
+    
+    'Split code given into Opponents Choice and Our Choice
+    Dim RS As Recordset
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    Dim PointsWon, Outcome
+    PointsWon = 0
+    Outcome = 0
+    
+    While Not RS.EOF
+    RS.Edit
+    RS!OpponentChoice = Left(RS!CodeGiven, 1)
+    RS!MyChoice = Right(RS!CodeGiven, 1)
+
+    Dim Rock, Paper, Scissors, Loss, Tie, Win
+    Rock = 1 'X
+    Paper = 2 'Y
+    Scissors = 3 'Z
+    Loss = 0
+    Tie = 3
+    Win = 6
+    
+    'Find The Match Outcome
+    'Rock
+    If RS!OpponentChoice = "A" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        Outcome = Tie
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        Outcome = Win
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        Outcome = Loss
+        End If
+    'Paper
+    ElseIf RS!OpponentChoice = "B" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        Outcome = Loss
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        Outcome = Tie
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        Outcome = Win
+        End If
+    'Scissors
+    ElseIf RS!OpponentChoice = "C" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        Outcome = Win
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        Outcome = Loss
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        Outcome = Tie
+        End If
+    End If
+    
+    'Find Points from Our Choice + The Match Outcome
+    'Rock
+    If RS!OpponentChoice = "A" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        PointsWon = Rock + Outcome
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        PointsWon = Paper + Outcome
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        PointsWon = Scissors + Outcome
+        End If
+    'Paper
+    ElseIf RS!OpponentChoice = "B" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        PointsWon = Rock + Outcome
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        PointsWon = Paper + Outcome
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        PointsWon = Scissors + Outcome
+        End If
+    'Scissors
+    ElseIf RS!OpponentChoice = "C" Then
+        'Rock
+        If RS!MyChoice = "X" Then
+        PointsWon = Rock + Outcome
+        'Paper
+        ElseIf RS!MyChoice = "Y" Then
+        PointsWon = Paper + Outcome
+        'Scissors
+        ElseIf RS!MyChoice = "Z" Then
+        PointsWon = Scissors + Outcome
+        End If
+    End If
+    
+    RS!points = PointsWon
+    RS.Update
+    RS.MoveNext
+    Wend
+    
+    RS.Close
+    Set RS = Nothing
+    
+'Answer
+MsgBox (DSum("Points", "AOCT"))
+    
+End Sub
