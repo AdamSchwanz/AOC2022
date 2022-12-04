@@ -1,0 +1,167 @@
+Private Sub AOCBtn2_Click()
+    'Table has ID Autonumber, Rucksack ShortText, MiddleNumber Number, MatchChar ShortText, Priority Number, Part2Match ShortText
+    'Find matches of 3 records at a time
+    Dim RS, RS1, RS2, RS3 As Recordset
+    Dim A, B, C
+    A = DMin("ID", "AOCT")
+    B = DMin("ID", "AOCT") + 1
+    C = DMin("ID", "AOCT") + 2
+    
+    Set RS = CurrentDb.OpenRecordset("Select * FROM AOCT")
+    
+    While Not RS.EOF
+    Set RS1 = CurrentDb.OpenRecordset("Select * From AOCT where ID=" & A)
+    Set RS2 = CurrentDb.OpenRecordset("Select * From AOCT where ID=" & B)
+    Set RS3 = CurrentDb.OpenRecordset("Select * From AOCT where ID=" & C)
+            RS1.Edit
+            
+            Dim i1 As Integer, i2 As Integer, i3 As Integer
+            i = 1
+            i2 = 1
+            i3 = 1
+            For i1 = 1 To Len(RS1!Rucksack)
+                    For i2 = 1 To Len(RS2!Rucksack)
+                        If StrComp(Right(Left(RS1!Rucksack, i1), 1), Right(Left(RS2!Rucksack, i2), 1), vbBinaryCompare) = 0 Then
+                            For i3 = 1 To Len(RS3!Rucksack)
+                                If StrComp(Right(Left(RS2!Rucksack, i2), 1), Right(Left(RS3!Rucksack, i3), 1), vbBinaryCompare) = 0 Then
+                                    RS1!Part2Match = Right(Left(RS2!Rucksack, i2), 1)
+                                End If
+                            Next i3
+                        End If
+                    Next i2
+            Next i1
+            'lazy error :)
+            On Error Resume Next
+            RS1.Update
+    'move to next 3 records
+    A = A + 3
+    B = B + 3
+    C = C + 3
+    RS.MoveNext
+    Wend
+    RS.Close
+    RS1.Close
+    RS2.Close
+    RS3.Close
+    Set RS = Nothing
+    Set RS1 = Nothing
+    Set RS2 = Nothing
+    Set RS3 = Nothing
+    
+    'Find Priority
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT Where Part2Match Like '*'")
+    Dim GrandTotal
+    GrandTotal = 0
+    While Not RS.EOF
+        'Find Priority, not pretty but easy to copy/paste fast
+        If StrComp(RS!Part2Match, LCase("a"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 1
+        ElseIf StrComp(RS!Part2Match, LCase("b"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 2
+        ElseIf StrComp(RS!Part2Match, LCase("c"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 3
+        ElseIf StrComp(RS!Part2Match, LCase("d"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 4
+        ElseIf StrComp(RS!Part2Match, LCase("e"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 5
+        ElseIf StrComp(RS!Part2Match, LCase("f"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 6
+        ElseIf StrComp(RS!Part2Match, LCase("g"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 7
+        ElseIf StrComp(RS!Part2Match, LCase("h"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 8
+        ElseIf StrComp(RS!Part2Match, LCase("i"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 9
+        ElseIf StrComp(RS!Part2Match, LCase("j"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 10
+        ElseIf StrComp(RS!Part2Match, LCase("k"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 11
+        ElseIf StrComp(RS!Part2Match, LCase("l"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 12
+        ElseIf StrComp(RS!Part2Match, LCase("m"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 13
+        ElseIf StrComp(RS!Part2Match, LCase("n"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 14
+        ElseIf StrComp(RS!Part2Match, LCase("o"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 15
+        ElseIf StrComp(RS!Part2Match, LCase("p"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 16
+        ElseIf StrComp(RS!Part2Match, LCase("q"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 17
+        ElseIf StrComp(RS!Part2Match, LCase("r"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 18
+        ElseIf StrComp(RS!Part2Match, LCase("s"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 19
+        ElseIf StrComp(RS!Part2Match, LCase("t"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 20
+        ElseIf StrComp(RS!Part2Match, LCase("u"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 21
+        ElseIf StrComp(RS!Part2Match, LCase("v"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 22
+        ElseIf StrComp(RS!Part2Match, LCase("w"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 23
+        ElseIf StrComp(RS!Part2Match, LCase("x"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 24
+        ElseIf StrComp(RS!Part2Match, LCase("y"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 25
+        ElseIf StrComp(RS!Part2Match, LCase("z"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 26
+        ElseIf StrComp(RS!Part2Match, UCase("a"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 27
+        ElseIf StrComp(RS!Part2Match, UCase("b"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 28
+        ElseIf StrComp(RS!Part2Match, UCase("c"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 29
+        ElseIf StrComp(RS!Part2Match, UCase("d"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 30
+        ElseIf StrComp(RS!Part2Match, UCase("e"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 31
+        ElseIf StrComp(RS!Part2Match, UCase("f"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 32
+        ElseIf StrComp(RS!Part2Match, UCase("g"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 33
+        ElseIf StrComp(RS!Part2Match, UCase("h"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 34
+        ElseIf StrComp(RS!Part2Match, UCase("i"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 35
+        ElseIf StrComp(RS!Part2Match, UCase("j"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 36
+        ElseIf StrComp(RS!Part2Match, UCase("k"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 37
+        ElseIf StrComp(RS!Part2Match, UCase("l"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 38
+        ElseIf StrComp(RS!Part2Match, UCase("m"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 39
+        ElseIf StrComp(RS!Part2Match, UCase("n"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 40
+        ElseIf StrComp(RS!Part2Match, UCase("o"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 41
+        ElseIf StrComp(RS!Part2Match, UCase("p"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 42
+        ElseIf StrComp(RS!Part2Match, UCase("q"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 43
+        ElseIf StrComp(RS!Part2Match, UCase("r"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 44
+        ElseIf StrComp(RS!Part2Match, UCase("s"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 45
+        ElseIf StrComp(RS!Part2Match, UCase("t"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 46
+        ElseIf StrComp(RS!Part2Match, UCase("u"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 47
+        ElseIf StrComp(RS!Part2Match, UCase("v"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 48
+        ElseIf StrComp(RS!Part2Match, UCase("w"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 49
+        ElseIf StrComp(RS!Part2Match, UCase("x"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 50
+        ElseIf StrComp(RS!Part2Match, UCase("y"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 51
+        ElseIf StrComp(RS!Part2Match, UCase("z"), vbBinaryCompare) = 0 Then
+            GrandTotal = GrandTotal + 52
+        End If
+    RS.MoveNext
+    Wend
+    
+    'answer
+    MsgBox GrandTotal
+End Sub
