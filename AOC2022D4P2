@@ -1,0 +1,27 @@
+Private Sub AOCBtn2_Click()
+    'continuation of Part1 same table
+    Dim RS As Recordset
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    'mark overlapping pairs
+    While Not RS.EOF
+        RS.Edit
+
+        If RS!AOC1Min = RS!AOC2Min Or RS!AOC1Min = RS!AOC2Max Or RS!AOC1Max = RS!AOC2Min Or RS!AOC1Max = RS!AOC2Max Then
+            RS!AOCOverlap = True
+        ElseIf RS!AOC1Min < RS!AOC2Min And RS!AOC1Max > RS!AOC2Min Then
+            RS!AOCOverlap = True
+        ElseIf RS!AOC2Min < RS!AOC1Min And RS!AOC2Max > RS!AOC1Min Then
+            RS!AOCOverlap = True
+        Else
+            RS!AOCOverlap = False
+        End If
+         
+        RS.Update
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    'answer
+    MsgBox DCount("*", "AOCT", "AOCOverlap=True")
+End Sub
