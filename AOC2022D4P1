@@ -1,0 +1,52 @@
+Private Sub AOCBtn_Click()
+    'One table AOCT with ID Autonumber, AOCStart ShortText, AOC1 ShortText, AOC2 Short Text, AOC1Min Number, AOC1Max Number, AOC2Min Number, AOC2Max Number, AOCOverlap Yes/No
+    'Split the Input
+    Dim RS As Recordset
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    While Not RS.EOF
+        RS.Edit
+        RS!AOC1 = Left(RS!AOCStart, InStr(RS!AOCStart, ",") - 1)
+        RS!AOC2 = Mid(RS!AOCStart, Len(RS!AOC1) + 2)
+        RS.Update
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    'split into two numbers
+    While Not RS.EOF
+        RS.Edit
+        RS!AOC1Min = Left(RS!AOC1, InStr(RS!AOC1, "-") - 1)
+        RS!AOC1Max = Mid(RS!AOC1, Len(RS!AOC1Min) + 2)
+        RS!AOC2Min = Left(RS!AOC2, InStr(RS!AOC2, "-") - 1)
+        RS!AOC2Max = Mid(RS!AOC2, Len(RS!AOC2Min) + 2)
+        RS.Update
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    'mark overlapping pairs
+    While Not RS.EOF
+        RS.Edit
+
+        If RS!AOC1Min <= RS!AOC2Min And RS!AOC1Max >= RS!AOC2Max Then
+                RS!AOCOverlap = True
+        ElseIf RS!AOC2Min <= RS!AOC1Min And RS!AOC2Max >= RS!AOC1Max Then
+                RS!AOCOverlap = True
+        Else
+            RS!AOCOverlap = False
+        End If
+         
+        RS.Update
+        RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    'answer
+    MsgBox DCount("*", "AOCT", "AOCOverlap=True")
+    
+End Sub
