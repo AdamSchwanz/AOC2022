@@ -1,0 +1,10 @@
+'Continuation of Part1 setup, simple math
+
+Private Sub AOC2_Click()
+    Dim A, B, C
+    A = DMax("AOCNumber", "AOCFinalT")
+    B = DMax("AOCNumber", "AOCFINALT", "AOCNumber<" & A)
+    C = DMax("AOCNumber", "AOCFINALT", "AOCNumber<" & B)
+    
+    MsgBox A + B + C
+End Sub
