@@ -1,0 +1,164 @@
+Private Sub AOCBtn_Click()
+    'Table has ID Autonumber, Rucksack ShortText, MiddleNumber Number, MatchChar ShortText, Priority Number
+    
+    'Find the middle of the rucksack
+    Dim RS As Recordset
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    
+    While Not RS.EOF
+        RS.Edit
+        RS!MiddleNumber = Len(RS!RuckSack) / 2
+        RS.Update
+    RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    
+    'Find the matching character
+    Dim RS2 As Recordset
+    Set RS2 = CurrentDb.OpenRecordset("Select * From AOCT")
+    
+    While Not RS2.EOF
+        RS2.Edit
+        Dim LeftHalf, RightHalf
+        LeftHalf = Left(RS2!RuckSack, RS2!MiddleNumber)
+        RightHalf = Right(RS2!RuckSack, RS2!MiddleNumber)
+
+        Dim i As Integer, i2 As Integer
+        i = 1
+        i2 = 1
+
+        For i = 1 To Len(LeftHalf)
+                For i2 = 1 To Len(LeftHalf)
+                    If StrComp(Right(Left(LeftHalf, i), 1), Right(Left(RightHalf, i2), 1), vbBinaryCompare) = 0 Then
+                    RS2!MatchChar = Right(Left(LeftHalf, i), 1)
+                    End If
+                Next i2
+        Next i
+        RS2.Update
+        RS2.MoveNext
+    Wend
+    
+    RS2.Close
+    Set RS2 = Nothing
+    
+    'Find Priority, not pretty but easy to copy/paste fast
+    Set RS = CurrentDb.OpenRecordset("Select * From AOCT")
+    
+    While Not RS.EOF
+        RS.Edit
+        If StrComp(RS!MatchChar, LCase("a"), vbBinaryCompare) = 0 Then
+            RS!Priority = 1
+        ElseIf StrComp(RS!MatchChar, LCase("b"), vbBinaryCompare) = 0 Then
+            RS!Priority = 2
+        ElseIf StrComp(RS!MatchChar, LCase("c"), vbBinaryCompare) = 0 Then
+            RS!Priority = 3
+        ElseIf StrComp(RS!MatchChar, LCase("d"), vbBinaryCompare) = 0 Then
+            RS!Priority = 4
+        ElseIf StrComp(RS!MatchChar, LCase("e"), vbBinaryCompare) = 0 Then
+            RS!Priority = 5
+        ElseIf StrComp(RS!MatchChar, LCase("f"), vbBinaryCompare) = 0 Then
+            RS!Priority = 6
+        ElseIf StrComp(RS!MatchChar, LCase("g"), vbBinaryCompare) = 0 Then
+            RS!Priority = 7
+        ElseIf StrComp(RS!MatchChar, LCase("h"), vbBinaryCompare) = 0 Then
+            RS!Priority = 8
+        ElseIf StrComp(RS!MatchChar, LCase("i"), vbBinaryCompare) = 0 Then
+            RS!Priority = 9
+        ElseIf StrComp(RS!MatchChar, LCase("j"), vbBinaryCompare) = 0 Then
+            RS!Priority = 10
+        ElseIf StrComp(RS!MatchChar, LCase("k"), vbBinaryCompare) = 0 Then
+            RS!Priority = 11
+        ElseIf StrComp(RS!MatchChar, LCase("l"), vbBinaryCompare) = 0 Then
+            RS!Priority = 12
+        ElseIf StrComp(RS!MatchChar, LCase("m"), vbBinaryCompare) = 0 Then
+            RS!Priority = 13
+        ElseIf StrComp(RS!MatchChar, LCase("n"), vbBinaryCompare) = 0 Then
+            RS!Priority = 14
+        ElseIf StrComp(RS!MatchChar, LCase("o"), vbBinaryCompare) = 0 Then
+            RS!Priority = 15
+        ElseIf StrComp(RS!MatchChar, LCase("p"), vbBinaryCompare) = 0 Then
+            RS!Priority = 16
+        ElseIf StrComp(RS!MatchChar, LCase("q"), vbBinaryCompare) = 0 Then
+            RS!Priority = 17
+        ElseIf StrComp(RS!MatchChar, LCase("r"), vbBinaryCompare) = 0 Then
+            RS!Priority = 18
+        ElseIf StrComp(RS!MatchChar, LCase("s"), vbBinaryCompare) = 0 Then
+            RS!Priority = 19
+        ElseIf StrComp(RS!MatchChar, LCase("t"), vbBinaryCompare) = 0 Then
+            RS!Priority = 20
+        ElseIf StrComp(RS!MatchChar, LCase("u"), vbBinaryCompare) = 0 Then
+            RS!Priority = 21
+        ElseIf StrComp(RS!MatchChar, LCase("v"), vbBinaryCompare) = 0 Then
+            RS!Priority = 22
+        ElseIf StrComp(RS!MatchChar, LCase("w"), vbBinaryCompare) = 0 Then
+            RS!Priority = 23
+        ElseIf StrComp(RS!MatchChar, LCase("x"), vbBinaryCompare) = 0 Then
+            RS!Priority = 24
+        ElseIf StrComp(RS!MatchChar, LCase("y"), vbBinaryCompare) = 0 Then
+            RS!Priority = 25
+        ElseIf StrComp(RS!MatchChar, LCase("z"), vbBinaryCompare) = 0 Then
+            RS!Priority = 26
+        ElseIf StrComp(RS!MatchChar, UCase("a"), vbBinaryCompare) = 0 Then
+            RS!Priority = 27
+        ElseIf StrComp(RS!MatchChar, UCase("b"), vbBinaryCompare) = 0 Then
+            RS!Priority = 28
+        ElseIf StrComp(RS!MatchChar, UCase("c"), vbBinaryCompare) = 0 Then
+            RS!Priority = 29
+        ElseIf StrComp(RS!MatchChar, UCase("d"), vbBinaryCompare) = 0 Then
+            RS!Priority = 30
+        ElseIf StrComp(RS!MatchChar, UCase("e"), vbBinaryCompare) = 0 Then
+            RS!Priority = 31
+        ElseIf StrComp(RS!MatchChar, UCase("f"), vbBinaryCompare) = 0 Then
+            RS!Priority = 32
+        ElseIf StrComp(RS!MatchChar, UCase("g"), vbBinaryCompare) = 0 Then
+            RS!Priority = 33
+        ElseIf StrComp(RS!MatchChar, UCase("h"), vbBinaryCompare) = 0 Then
+            RS!Priority = 34
+        ElseIf StrComp(RS!MatchChar, UCase("i"), vbBinaryCompare) = 0 Then
+            RS!Priority = 35
+        ElseIf StrComp(RS!MatchChar, UCase("j"), vbBinaryCompare) = 0 Then
+            RS!Priority = 36
+        ElseIf StrComp(RS!MatchChar, UCase("k"), vbBinaryCompare) = 0 Then
+            RS!Priority = 37
+        ElseIf StrComp(RS!MatchChar, UCase("l"), vbBinaryCompare) = 0 Then
+            RS!Priority = 38
+        ElseIf StrComp(RS!MatchChar, UCase("m"), vbBinaryCompare) = 0 Then
+            RS!Priority = 39
+        ElseIf StrComp(RS!MatchChar, UCase("n"), vbBinaryCompare) = 0 Then
+            RS!Priority = 40
+        ElseIf StrComp(RS!MatchChar, UCase("o"), vbBinaryCompare) = 0 Then
+            RS!Priority = 41
+        ElseIf StrComp(RS!MatchChar, UCase("p"), vbBinaryCompare) = 0 Then
+            RS!Priority = 42
+        ElseIf StrComp(RS!MatchChar, UCase("q"), vbBinaryCompare) = 0 Then
+            RS!Priority = 43
+        ElseIf StrComp(RS!MatchChar, UCase("r"), vbBinaryCompare) = 0 Then
+            RS!Priority = 44
+        ElseIf StrComp(RS!MatchChar, UCase("s"), vbBinaryCompare) = 0 Then
+            RS!Priority = 45
+        ElseIf StrComp(RS!MatchChar, UCase("t"), vbBinaryCompare) = 0 Then
+            RS!Priority = 46
+        ElseIf StrComp(RS!MatchChar, UCase("u"), vbBinaryCompare) = 0 Then
+            RS!Priority = 47
+        ElseIf StrComp(RS!MatchChar, UCase("v"), vbBinaryCompare) = 0 Then
+            RS!Priority = 48
+        ElseIf StrComp(RS!MatchChar, UCase("w"), vbBinaryCompare) = 0 Then
+            RS!Priority = 49
+        ElseIf StrComp(RS!MatchChar, UCase("x"), vbBinaryCompare) = 0 Then
+            RS!Priority = 50
+        ElseIf StrComp(RS!MatchChar, UCase("y"), vbBinaryCompare) = 0 Then
+            RS!Priority = 51
+        ElseIf StrComp(RS!MatchChar, UCase("z"), vbBinaryCompare) = 0 Then
+            RS!Priority = 52
+        End If
+    RS.Update
+    RS.MoveNext
+    Wend
+    RS.Close
+    Set RS = Nothing
+    
+    'answer
+    MsgBox DSum("priority", "AOCT")
+End Sub
