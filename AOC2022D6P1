@@ -1,0 +1,24 @@
+Private Sub AOCBtn_Click()
+    'one table AOCT ID As Autonumber, AOCInput LongText
+    Dim X, Y, Z
+    X = 1
+    Y = 4
+    Z = DLookup("AOCInput", "AOCT")
+    
+    Do While X < Len(Z)
+        Dim A, S
+        S = Left(Z, Y)
+        A = Mid(S, X)
+
+        'Answer
+        If Right(Left(A, 1), 1) = Left(Mid(A, 2), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 3), 1) Or Right(Left(A, 1), 1) = Right(Left(A, 4), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 3), 1) Or Left(Mid(A, 2), 1) = Right(Left(A, 4), 1) Or Left(Mid(A, 3), 1) = Right(Left(A, 4), 1) Then
+        'no match
+        Else
+        MsgBox X + 3
+        Exit Do
+        End If
+    Y = Y + 1
+    X = X + 1
+    Loop
+    
+End Sub
