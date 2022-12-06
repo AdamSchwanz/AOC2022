@@ -1,0 +1,27 @@
+Private Sub AOCBtn_Click()
+    'one table AOCT ID As Autonumber, AOCInput LongText
+    Dim X, Y, Z
+    X = 1
+    Y = 14
+    Z = DLookup("AOCInput", "AOCT")
+    
+    Do While X < Len(Z)
+        Dim A, S
+        S = Left(Z, Y)
+        A = Mid(S, X)
+    'Answer
+ If Right(Left(A, 1), 1) = Left(Mid(A, 2), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 3), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 4), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 5), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 6), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 7), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 8), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 9), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 10), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 11), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 12), 1) Or Right(Left(A, 1), 1) = Left(Mid(A, 13), 1) Or Right(Left(A, 1), 1) = Right(Left(A, 14), 1) _
+Or Left(Mid(A, 2), 1) = Left(Mid(A, 3), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 4), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 5), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 6), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 7), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 2), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 2), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 4), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 5), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 6), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 7), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 3), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 3), 1) = Right(Left(A, 14), 1) _
+Or Left(Mid(A, 4), 1) = Left(Mid(A, 5), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 6), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 7), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 4), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 4), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 6), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 7), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 5), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 5), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 6), 1) = Left(Mid(A, 7), 1) Or Left(Mid(A, 6), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 6), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 6), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 6) _
+Or Left(Mid(A, 6), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 8), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 7), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 7), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 8), 1) = Left(Mid(A, 9), 1) Or Left(Mid(A, 8), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 8), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 8), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 8), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 8), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 9), 1) = Left(Mid(A, 10), 1) Or Left(Mid(A, 9), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 9), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 9), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 9), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 10), 1) = Left(Mid(A, 11), 1) Or Left(Mid(A, 10), 1) = Left(Mid(A, 12), 1) Or Left(Mid(A, 10), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 10), 1) = Right(Left(A, 14), 1 _
+Or Left(Mid(A, 12), 1) = Left(Mid(A, 13), 1) Or Left(Mid(A, 12), 1) = Right(Left(A, 14), 1) Or Left(Mid(A, 13), 1) = Right(Left(A, 14), 1) Then
+        'no match
+        Else
+        MsgBox X + 13
+        Exit Do
+        End If
+    Y = Y + 1
+    X = X + 1
+    Loop
+    
+End Sub
